@@ -1,0 +1,34 @@
+.button-centr-container
+    display: block
+    position: absolute
+    left: 50%
+    transform: translateY(-50%) translateX(-50%)
+    position: absolute    
+    .button-centr       
+        text-decoration: none
+        display: inline-block
+        padding: 38px 58px
+        border-radius: 50px
+        color: #ffffff
+        font-family: Montserrat
+        font-size: 21px
+        font-weight: 700
+        background: #a285a9
+        line-height: 20px
+        transition: color .3s ease
+        &:hover
+            background: darken(#a285a9, 5%)
+
+@media screen and ( max-width: 768px )
+    .button-centr-container
+        width: 90%
+        .button-centr
+            display: block           
+            text-align: center
+            padding: 28px 48px           
+            
+            
+@media screen and ( max-width: 578px )
+    .button-centr-container
+        .button-centr            
+            padding: 10px 20px

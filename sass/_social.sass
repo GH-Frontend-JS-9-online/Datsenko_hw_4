@@ -1,0 +1,79 @@
+
+.social
+    background: #fdeaeb
+    text-align: center
+    font-family: Montserrat
+    font-weight: 400
+    &-slide-container
+        margin: 60px 0
+        line-height: 32px
+    .author
+        display: flex
+        justify-content: center
+        align-items: center
+        .author-text
+            margin-left: 20px
+            .author-text-title
+                color: #635c73                
+                font-size: 24px
+                font-weight: 700                
+                .author-text-subtext
+                    color: #8d81ac                    
+                    font-size: 16px                    
+    .info
+        text-align: center
+        padding: 50px 0
+        border-bottom: 1px solid rgba(132, 97, 110, .1)
+        .info-text
+            color: #333333
+            font-family: "Source Sans Pro"
+            font-size: 20px            
+            a
+                color: #8d81ac
+        .info-subtext
+            color: #848e97            
+            font-size: 16px
+           
+            
+
+    .social-buttons
+        padding: 30px
+        .social-button
+            .button
+                display: inline-block
+                padding: 15px 40px
+                color: #000000                
+                font-size: 21px                
+                line-height: 32px
+                text-decoration: none
+                width: 100%
+                margin: 0 10px
+                transition: color .3s ease                    
+                .icon
+                    padding-right: 10px
+            .github
+                background: #f3e1e2                
+                &:hover
+                    background: darken(#f3e1e2, 10%)
+            .twitter
+                background: #4fa3c6
+                color: #ffffff               
+                &:hover
+                    background: darken(#4fa3c6, 10%)
+            .facebook
+                background: #4e5184
+                color: #ffffff                   
+                &:hover
+                    background: darken(#4e5184, 10%)
+        .after-btn-text
+            color: #848e97            
+            font-size: 14px                
+            line-height: 32px
+            padding: 5px 
+
+@media screen and ( max-width: 540px )
+    .social
+        &-buttons
+            .social-button
+                .button
+                    padding: 5px 10px

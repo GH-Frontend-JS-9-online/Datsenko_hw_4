@@ -1,0 +1,50 @@
+
+
+
+.features
+    background: #f4e1e2
+    font-family: Montserrat
+    font-weight: 400 
+    .features-container
+        padding: 60px 0
+        .features-left-container
+            .features-left-container-block
+                display: flex
+                flex-wrap: wrap
+                justify-content: space-between
+                align-items: center                              
+                .features-left-container-block-text                   
+                    line-height: 21px
+                    width: 70%
+                    .text-block-title 
+                        color: #323232                                           
+                        font-size: 16px                        
+                    .text-block-subtext
+                        color: #848e97                        
+                        font-size: 14px
+        .features-right-container 
+            .features-right-container-title
+                color: #8d81ac                
+                font-size: 48px
+                font-weight: 700                
+            .features-right-container-img               
+                overflow-x: hidden
+
+@media screen and (max-width: 1200px)
+    .features
+        .features-container                            
+                .features-right-container
+                    .features-right-container-title
+                        font-size: 38px      
+
+
+@media screen and (max-width: 760px)
+    .features
+        .features-container                            
+                .features-right-container
+                    .features-right-container-title
+                        font-size: 26px                        
+                .features-left-container
+                    .features-left-container-block
+                        .features-left-container-block-text 
+                            width: 60%
