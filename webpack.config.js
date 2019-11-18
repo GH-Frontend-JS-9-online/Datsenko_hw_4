@@ -1,40 +1,120 @@
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const path = require("path")
+const fs = require("fs")
+const {
+	CleanWebpackPlugin
+} = require("clean-webpack-plugin")
+const CopyWebpackPlugin = require("copy-webpack-plugin")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const TerserPlugin = require("terser-webpack-plugin")
 
-module.exports = {
-    entry: './src/index.js',
-    devServer: {
-        contentBase: './dist',
-    },
-    plugins: [
-        new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            title: 'App Forkio',
-            template: './src/index.html',
-            filename: 'index.html',
-        }),
-    ],
-    output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist'),
-    },
-    module: {
-        rules: [{
-                test: /\.css$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                ],
-            },
-            {
-                test: /\.(png|svg|jpg|gif)$/,
-                loader: 'file-loader?name=/img/[name].[ext]'
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
-                loader: 'file-loader?name=/fonts/[name].[ext]'                
-            },
-        ],
-    },
+function generateHtmlPlugins(templateDir) {
+	const templateFiles = fs.readdirSync(path.resolve(__dirname, templateDir))
+	return templateFiles.map(item => {
+		const parts = item.split(".")
+		const name = parts[0]
+		const extension = parts[1]
+		return new HtmlWebpackPlugin({
+			filename: `${name}.html`,
+			template: path.resolve(__dirname, `${templateDir}/${name}.${extension}`),
+			inject: false
+		})
+	})
+}
+
+const htmlPlugins = generateHtmlPlugins("./src/html/views")
+
+const config = {
+	entry: ["./src/js/index.js", "./src/sass/style.sass"],
+	output: {
+		filename: "./js/bundle.js"
+	},
+	devtool: "source-map",
+	mode: "production",
+	optimization: {
+		minimizer: [
+			new TerserPlugin({
+				sourceMap: true,
+				extractComments: true
+			})
+		]
+	},
+	module: {
+		rules: [{
+				test: /\.(sass|scss)$/,
+				include: path.resolve(__dirname, "src/sass"),
+				use: [{
+						loader: MiniCssExtractPlugin.loader,
+						options: {}
+					},
+					{
+						loader: "css-loader",
+						options: {
+							sourceMap: true,
+							url: false
+						}
+					},
+					{
+						loader: "postcss-loader",
+						options: {
+							ident: "postcss",
+							sourceMap: true,
+							plugins: () => [
+								require("cssnano")({
+									preset: [
+										"default",
+										{
+											discardComments: {
+												removeAll: true
+											}
+										}
+									]
+								})
+							]
+						}
+					},
+					{
+						loader: "sass-loader",
+						options: {
+							sourceMap: true
+						}
+					}
+				]
+			},
+			{
+				test: /\.html$/,
+				include: path.resolve(__dirname, "src/html/includes"),
+				use: ["raw-loader"]
+			}
+		]
+	},
+	plugins: [
+		new MiniCssExtractPlugin({
+			filename: "./css/style.bundle.css"
+		}),
+		new CopyWebpackPlugin([{
+				from: "./src/fonts",
+				to: "./fonts"
+			},
+			{
+				from: "./src/favicon",
+				to: "./favicon"
+			},
+			{
+				from: "./src/img",
+				to: "./img"
+			},
+			{
+				from: "./src/uploads",
+				to: "./uploads"
+			}
+		])
+	].concat(htmlPlugins)
+}
+
+module.exports = (env, argv) => {
+	if (argv.mode === "production") {
+		config.plugins.push(new CleanWebpackPlugin())
+	}
+	return config
 }
