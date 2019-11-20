@@ -34,69 +34,72 @@
                     border: none                
     
     .about-fork-price-cards
-        padding: 60px 0
-        .about-fork-prise-card
-            .card                
-                background: lighten(#866775, 5%)
-                opacity: 0.7
+        padding: 60px 0       
+        justify-content: space-between
+        flex-wrap: wrap            
+        .price-card
+            background: lighten(#866775, 5%)
+            opacity: 0.7
+            display: flex
+            flex-direction: column
+            justify-content: space-between
+            width: 20%
+            cursor: pointer
+            transition: transform .3s ease
+            &:hover
+                transform: scale(1.2)
+            .card-title
+                padding: 20px
+                //background: rgba(132, 97, 110, .3)
                 border: none
-                transition: transform .3s ease 
+                text-transform: uppercase
+                font-size: 24px
+                font-weight: 400
+                line-height: 20.45px
+                font-family: Montserrat
+            .card-price
+                color: #ffffff
+                font-family: Montserrat
+                font-size: 48px
+                font-weight: 700
+                line-height: 20.45px
+                padding:  10px 0
+            .card-date
+                opacity: 0.3
+                color: #ffffff
+                font-family: Montserrat
+                font-size: 14px
+                font-weight: 400
+                padding: 10px 0
+                line-height: 20.45px
+                text-transform: uppercase     
+            .card-line
+                margin: 0 auto
+                height: 5px
+                background-color: #8d81ac
+                width: 30%
+                border: none         
+            .card-text
+                color: #ffffff
+                font-family: Montserrat
+                font-size: 16px
+                font-weight: 400
+                padding: 10px 0
+                line-height: 32px
+            .card-btn
+                color: #ffffff                        
+                font-size: 15px                        
+                line-height: 20.45px
+                text-transform: uppercase
+                background: rgba(132, 97, 110, .3)
+                border-radius: 50px
+                padding: 15px 20px
+                margin-bottom: 20px
+                margin-top: auto 
+                transition: all .3s ease
                 &:hover
-                    transform: scale(1.2)
-                .card-header
-                    padding: 20px
-                    background: rgba(132, 97, 110, .3)
-                    border: none
-                    text-transform: uppercase
-                    font-size: 24px
-                    font-weight: 400
-                    line-height: 20.45px
-                    font-family: Montserrat
-                .card-body
-                    .price
-                        color: #ffffff
-                        font-family: Montserrat
-                        font-size: 48px
-                        font-weight: 700
-                        line-height: 20.45px
-                        padding:  10px 0
-                    .price-date                        
-                        opacity: 0.3
-                        color: #ffffff
-                        font-family: Montserrat
-                        font-size: 14px
-                        font-weight: 400
-                        padding: 10px 0
-                        line-height: 20.45px
-                        text-transform: uppercase
-                    .price-text                        
-                        color: #ffffff
-                        font-family: Montserrat
-                        font-size: 16px
-                        font-weight: 400
-                        padding: 10px 0
-                        line-height: 32px
-                    .price-line
-                        margin: 0 auto
-                        height: 5px
-                        background-color: #8d81ac
-                        width: 30%
-                        border: none                               
-                .card-footer
-                    background: transparent
-                    border: none
-                    .price-btn
-                        color: #ffffff                        
-                        font-size: 15px                        
-                        line-height: 20.45px
-                        text-transform: uppercase
-                        background: rgba(132, 97, 110, .3)
-                        border-radius: 50px
-                        padding: 15px 25px
-                        margin-bottom: 20px
-                        transition: all .3s ease
-                        &:hover
-                            background: rgba(132, 97, 110, .9)      
+                    background: rgba(132, 97, 110, .9)                   
+      
     
     .about-fork-price-text
         opacity: 0.8
@@ -110,10 +113,20 @@
 
 
 
-// @media screen and (max-width: 769px)
-//     .about-fork   
-//         .about-fork-price-cards
-//             justify-content: center
-//             .about-fork-price-card
-//                 width: 25%
-//                 background: red
+@media screen and (max-width: 769px)
+    .about-fork
+        padding-left: 0
+        padding-right: 0
+        .about-fork-title
+            line-height: 50px
+            font-size: 40px
+        .about-fork-price-cards
+            justify-content: center
+            .price-card
+                width: 60%
+                margin: 20px 0
+               
+@media screen and (max-width: 541px)
+    .about-fork
+        .about-fork-title            
+            font-size: 30px
